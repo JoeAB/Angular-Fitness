@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="utf-8">
+  <title>Fitness Calculator</title>
+  <meta name="description" content="Fitness Calculator">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.min.js"></script>
+  <script src="app.js"></script>
+
+</head>
+
+<body style="text-align: center; " ng-controller="bmi">
+	<form ng-submit="calculate(weight, height)">
+		<p>
+			Weight in pounds: <input type="number" ng-model="weight" /> <br />
+			Height in inches: <input type="number" ng-model="height" /> <br />
+			<input type="submit" value="Calculate"/><br />
+			Your BMI is {{bmi}} <br />
+		</p>
+	</form>
+	<div ng-if="showBMR==true">
+		<form ng-submit="bmrCalc(age, sex, weight, height)">
+			Sex: <label>Male<input type="radio" ng-model="sex" value="male" /></label>
+			<label>Female<input type="radio" ng-model="sex" value="female" /></label><br />
+			Age: <input type="number" ng-model="age" /> <br />
+			<input type="submit" value="Calculate"/><br />
+			Your BMR is {{bmr}} <br/>
+		</form>
+	</div>
+	<div ng-if="showActivity==true">
+		<form ng-submit="tdeeCalc(bmr, activityLevel)">
+			Select activity level: 
+			<select ng-model="activityLevel">
+				<option ng-repeat="activity in activityLevels" value="{{activity.factor}}">
+					{{activity.description}}
+				</option>
+			</select><br />
+			<input type="submit" value="Calculate"/><br />
+		</form>
+		Your TDEE is {{tdee}} <br/>
+	</div>
+	
+</body>
+</html>
